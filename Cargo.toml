@@ -1,0 +1,37 @@
+[package]
+name = "desktop-remote-kit"
+version = "0.1.0"
+edition = "2021"
+description = "Tray, Windows autostart, optional Telegram remote and GitHub update check for self-contained desktop apps"
+license = "MIT"
+repository = "https://github.com/RiasJ1Dar/desktop-remote-kit"
+readme = "README.md"
+keywords = ["tray", "autostart", "telegram", "updater", "desktop"]
+categories = ["gui", "os"]
+
+[features]
+default = ["update"]
+update = ["dep:ureq", "dep:serde", "dep:serde_json"]
+telegram = ["dep:ureq", "dep:serde", "dep:serde_json"]
+tray = ["dep:tray-icon", "dep:tao"]
+full = ["update", "telegram", "tray"]
+
+[dependencies]
+thiserror = "2"
+ureq = { version = "2.12", optional = true, default-features = true, features = ["json"] }
+serde = { version = "1", optional = true, features = ["derive"] }
+serde_json = { version = "1", optional = true }
+tray-icon = { version = "0.19", optional = true }
+tao = { version = "0.30", optional = true }
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.55"
+
+[[example]]
+name = "demo"
+required-features = ["update"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
