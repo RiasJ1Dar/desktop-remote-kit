@@ -2,57 +2,155 @@
 
 # desktop-remote-kit
 
-Rust-набір для самодостатніх десктопних програм: трей, автозапуск Windows,
-опційний Telegram-пульт і перевірка релізу на GitHub. Хост-застосунок лишає
-свою бізнес-логіку; спільне «обв’язування» бере кіт.
+Rust-набір для самодостатніх десктопних програм: автозапуск Windows, перевірка
+GitHub Releases, опційний Telegram-пульт і helper для системного трея.
+Хост-застосунок зберігає власну бізнес-логіку, команди й політику оновлення;
+kit дає спільні низькорівневі блоки.
 
-Це **бібліотека**, не окремий продукт для кінцевого користувача.
+Це бібліотека, а не окремий продукт для кінцевого користувача. Поточна версія:
+0.1.0.
 
-## Можливості (MVP 0.1)
+## Cargo features
 
 | Модуль | Feature | Що робить |
 |---|---|---|
-| `autostart` | завжди | Windows: `HKCU\...\Run`. Linux/macOS — `Unsupported` (налаштовуй у хості). |
-| `update` | `update` (default) | `releases/latest` на GitHub; **лише перевірка**, без підміни бінарника. |
-| `telegram` | `telegram` | Long-poll `getUpdates` + `sendMessage`; хост реалізує `CommandHandler`. |
-| `tray` | `tray` | Обгортка `tray-icon` + `tao`: меню, Quit, іконка RGBA. |
+| `autostart` | завжди | Windows `HKCU\...\Run`; на Linux/macOS повертає `Unsupported` |
+| `update` | `update`, увімкнено за замовчуванням | Перевіряє `releases/latest` на GitHub |
+| `telegram` | `telegram` | `getUpdates`, `sendMessage` і callback `CommandHandler` |
+| `tray` | `tray` | Обгортка `tray-icon` + `tao` з меню та блокувальним event loop |
+| усі опційні модулі | `full` | `update + telegram + tray` |
 
-Feature `full` = update + telegram + tray.
-
-## Швидкий старт
+Підключити весь набір:
 
 ```toml
 [dependencies]
 desktop-remote-kit = { git = "https://github.com/RiasJ1Dar/desktop-remote-kit", features = ["full"] }
 ```
 
+Лише базовий `autostart` без HTTP і GUI-залежностей:
+
+```toml
+[dependencies]
+desktop-remote-kit = { git = "https://github.com/RiasJ1Dar/desktop-remote-kit", default-features = false }
+```
+
+## Ідентифікатор застосунку
+
 ```rust
-use desktop_remote_kit::{autostart, update, AppId};
-use desktop_remote_kit::update::GithubRepo;
-use std::env;
-use std::path::PathBuf;
+use desktop_remote_kit::AppId;
+
+let app = AppId::new(
+    "MyApp",
+    "My App",
+    env!("CARGO_PKG_VERSION"),
+);
+```
+
+- `id` використовується як ім'я Windows Run value;
+- `name` входить у підписи й User-Agent;
+- `version` порівнюється з тегом GitHub Release.
+
+## Автозапуск Windows
+
+```rust
+use desktop_remote_kit::{autostart, AppId};
 
 let app = AppId::new("MyApp", "My App", "1.0.0");
-let exe = env::current_exe().unwrap();
-let _ = autostart::enable(&app, &exe, "");
+let exe = std::env::current_exe()?;
+
+autostart::enable(&app, &exe, "--background")?;
+assert!(autostart::is_enabled(&app)?);
+
+// коли автозапуск більше не потрібен:
+// autostart::disable(&app)?;
+```
+
+`enable` приймає лише абсолютний шлях. Реєстрація діє для поточного
+користувача в
+`HKCU\Software\Microsoft\Windows\CurrentVersion\Run`.
+
+## Перевірка GitHub Release
+
+```rust
+use desktop_remote_kit::update::{self, GithubRepo};
 
 let repo = GithubRepo::new("You", "MyApp");
-if let Ok(Some(newer)) = update::check_latest(&app, &repo) {
-    eprintln!("є оновлення: {} {}", newer.tag, newer.html_url);
+if let Some(release) = update::check_latest(&app, &repo)? {
+    println!("нова версія: {} — {}", release.tag, release.html_url);
 }
 ```
 
-Демо без трею:
+Модуль лише перевіряє наявність новішого релізу. Він не завантажує й не
+підміняє бінарник. Порівняння версій числове за компонентами
+(`1.2`, `1.2.0`, `v1.3.0`); нечислові хвости не мають повної semver-семантики.
+
+Для підписаної доставки файлів див.
+[ota-sign](https://github.com/RiasJ1Dar/ota-sign).
+
+## Telegram-пульт
+
+Хост визначає дозволені chat ID і обробку команд:
+
+```rust
+use desktop_remote_kit::telegram::{
+    poll_once, BotConfig, CommandHandler, Incoming,
+};
+
+struct Handler;
+
+impl CommandHandler for Handler {
+    fn handle(&mut self, msg: &Incoming) -> Option<String> {
+        match msg.text.as_str() {
+            "/status" => Some("running".into()),
+            _ => Some("unknown command".into()),
+        }
+    }
+}
+
+let cfg = BotConfig {
+    token: std::env::var("TELEGRAM_BOT_TOKEN")?,
+    allow_chats: vec![123456789],
+};
+
+let mut offset = 0;
+let mut handler = Handler;
+offset = poll_once(&cfg, offset, 30, &mut handler)?;
+```
+
+Порожній `allow_chats` дозволяє команди з будь-якого чату. Токен і цикл
+повторного виклику `poll_once` зберігає та контролює хост.
+
+## Трей
+
+Модуль `tray` приймає RGBA-іконку, додаткові `MenuEntry` і callback для
+`TrayEvent::Menu` / `TrayEvent::Quit`. `run_loop` блокує потік до виходу,
+тому хост має сам вирішити, де запускати event loop і як передавати спільний стан.
+
+## Демо
 
 ```bash
 cargo run --example demo --features update
 ```
 
-## Чого навмисне немає
+Демо створює `AppId`, читає стан автозапуску й перевіряє останній реліз цього
+репозиторію. Воно не змінює автозапуск.
 
-- Підміна `.exe` / інсталятор оновлень — у хості або в майбутньому `ota-sign`.
-- Автозапуск Linux/macOS — у документації хоста (як у TwitchDropFarm).
-- Готовий набір Telegram-команд — лише колбек.
+## Межі відповідальності
+
+- Підміна `.exe`, інсталятор і rollback належать хосту або `ota-sign`.
+- Автозапуск Linux/macOS налаштовує хост через desktop entry або LaunchAgent.
+- Набір не визначає готові Telegram-команди й не зберігає bot token.
+- UI, журналювання та фонові worker-и залишаються в хост-застосунку.
+
+План розвитку: [docs/roadmap.md](docs/roadmap.md).
+
+## Розробка
+
+```bash
+cargo fmt --check
+cargo test --all-features
+cargo clippy --all-targets --all-features -- -D warnings
+```
 
 ## Ліцензія
 
