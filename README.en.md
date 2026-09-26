@@ -78,6 +78,8 @@ if let Some(release) = update::check_latest(&app, &repo)? {
 }
 ```
 
+`NewerRelease` holds `tag`, `html_url` and `body` (release notes, if any). Drafts are ignored.
+
 The module only reports a newer release. It does not download or replace the
 binary. Version comparison is numeric by component (`1.2`, `1.2.0`,
 `v1.3.0`); non-numeric suffixes do not receive full semver treatment.
@@ -115,6 +117,12 @@ let mut handler = Handler;
 offset = poll_once(&cfg, offset, 30, &mut handler)?;
 ```
 
+To send a message on your own (for example a notification with no incoming command):
+
+```rust
+desktop_remote_kit::telegram::send_text(&cfg, 123456789, "done")?;
+```
+
 An empty `allow_chats` accepts commands from every chat. The host stores the
 token and owns the loop that repeatedly calls `poll_once`.
 
@@ -124,6 +132,18 @@ The `tray` module accepts an RGBA icon, extra `MenuEntry` values, and a
 callback for `TrayEvent::Menu` / `TrayEvent::Quit`. `run_loop` blocks until
 exit, so the host decides where the event loop runs and how shared state is
 passed into it.
+A "Quit" item is always added; the callback returns `true` to leave the loop.
+
+```rust
+use desktop_remote_kit::tray::{icon_rgba, run_loop, MenuEntry, TrayEvent};
+
+let icon = icon_rgba(vec![0x40; 16 * 16 * 4], 16, 16)?;   // RGBA, width, height
+let extras = [MenuEntry { label: "Open".into(), id: "open".into() }];
+run_loop("MyApp", icon, &extras, |ev| match ev {
+    TrayEvent::Menu(id) => { println!("{id}"); false }
+    TrayEvent::Quit => true,                               // true = exit the loop
+})?;
+```
 
 ## Demo
 
