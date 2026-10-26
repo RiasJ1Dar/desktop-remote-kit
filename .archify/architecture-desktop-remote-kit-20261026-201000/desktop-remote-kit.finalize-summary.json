@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+    "sha256": "aff33f011c338df72a2f0b38a136ca91b55fed7b7873e2273af2150c34f08de6",
+    "bytes": 5750
+  },
+  "artifact": {
+    "path": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+    "sha256": "467445c97cb0d63228786a702fb61872598b0900fda3fc457f799e356cc8d776",
+    "bytes": 832119
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html"
+      },
+      "evidence": {
+        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nWindows browser startup may have relaunched before connecting to the DevTools pipe. Retry from a non-elevated PowerShell opened normally, outside an elevated or compatibility-mode parent. Archify does not disable browser de-elevation or the sandbox to preserve pipe handles.\nChrome transport: Node v26.5.0, libuv 1.52.1, win32; pid=7524, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=false, ended=true, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize.json",
+    "summaryReceipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-26T17:28:59.599Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 1777,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

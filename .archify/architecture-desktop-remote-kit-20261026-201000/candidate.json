@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "desktop-remote-kit: блоки для самодостатнього десктопу",
+    "output": ".archify/architecture-desktop-remote-kit-20261026-201000/desktop-remote-kit.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/RiasJ1Dar/desktop-remote-kit.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "aaf803dc7857a941a80c8c0351fcfa7afa80abc4"
+    }
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [40, 40],
+    "cols": 5,
+    "cellW": 125,
+    "cellH": 70,
+    "gapX": 70,
+    "gapY": 90
+  },
+  "components": [
+    {
+      "id": "appid", "type": "backend", "label": "AppId", "sublabel": "id, name, version",
+      "row": 0, "col": 1,
+      "sources": [{ "path": "src/lib.rs", "line": 19, "end_line": 43 }]
+    },
+    {
+      "id": "autostart", "type": "backend", "label": "autostart", "sublabel": "завжди в наборі",
+      "row": 0, "col": 2,
+      "sources": [{ "path": "src/autostart.rs", "line": 26, "end_line": 68 }]
+    },
+    {
+      "id": "runkey", "type": "database", "label": "Run-ключ HKCU", "sublabel": "значення = id",
+      "row": 0, "col": 3,
+      "sources": [{ "path": "src/autostart.rs", "line": 77, "end_line": 107, "label": "winreg" }]
+    },
+    {
+      "id": "host", "type": "external", "label": "Хост-застосунок", "sublabel": "своя логіка",
+      "row": 1, "col": 0,
+      "sources": [{ "path": "README.md", "line": 5, "end_line": 11, "label": "межа набору" }]
+    },
+    {
+      "id": "update", "type": "backend", "label": "update", "sublabel": "feature: update",
+      "row": 1, "col": 2,
+      "sources": [
+        { "path": "src/update.rs", "line": 66, "end_line": 96 },
+        { "path": "src/update.rs", "line": 102, "end_line": 115, "label": "порівняння версій" }
+      ]
+    },
+    {
+      "id": "ghapi", "type": "cloud", "label": "releases/latest", "sublabel": "api.github.com",
+      "row": 1, "col": 3,
+      "sources": [{ "path": "src/update.rs", "line": 67, "end_line": 76 }]
+    },
+    {
+      "id": "allowlist", "type": "security", "label": "allow_chats", "sublabel": "фільтр chat id",
+      "row": 1, "col": 4,
+      "sources": [{ "path": "src/telegram.rs", "line": 124, "end_line": 126 }]
+    },
+    {
+      "id": "telegram", "type": "backend", "label": "telegram", "sublabel": "feature: telegram",
+      "row": 2, "col": 2,
+      "sources": [
+        { "path": "src/telegram.rs", "line": 93, "end_line": 136, "label": "poll_once" },
+        { "path": "src/telegram.rs", "line": 70, "end_line": 88, "label": "send_text" }
+      ]
+    },
+    {
+      "id": "botapi", "type": "cloud", "label": "Bot API", "sublabel": "api.telegram.org",
+      "row": 2, "col": 3,
+      "sources": [{ "path": "src/telegram.rs", "line": 99, "end_line": 107, "label": "getUpdates" }]
+    },
+    {
+      "id": "tray", "type": "frontend", "label": "tray", "sublabel": "feature: tray",
+      "row": 3, "col": 2,
+      "sources": [
+        { "path": "src/tray.rs", "line": 49, "end_line": 97 },
+        { "path": "src/tray.rs", "line": 40, "end_line": 42, "label": "icon_rgba" }
+      ]
+    },
+    {
+      "id": "handler", "type": "backend", "label": "CommandHandler", "sublabel": "реалізує хост",
+      "row": 3, "col": 3,
+      "sources": [{ "path": "src/telegram.rs", "line": 40, "end_line": 43 }]
+    }
+  ],
+  "connections": [
+    { "id": "host-appid", "from": "host", "to": "appid", "variant": "emphasis", "fromSide": "top" },
+    { "id": "appid-auto", "from": "appid", "to": "autostart", "label": "id" },
+    { "id": "auto-run", "from": "autostart", "to": "runkey", "label": "пише" },
+    { "id": "appid-update", "from": "appid", "to": "update", "label": "версія" },
+    { "id": "update-gh", "from": "update", "to": "ghapi", "label": "GET" },
+    { "id": "host-tg", "from": "host", "to": "telegram", "label": "BotConfig", "fromSide": "bottom" },
+    { "id": "host-tray", "from": "host", "to": "tray", "label": "icon, меню", "fromSide": "bottom" },
+    { "id": "allow-tg", "from": "allowlist", "to": "telegram", "label": "фільтр", "variant": "security", "fromSide": "bottom", "toSide": "top" },
+    { "id": "tg-bot", "from": "telegram", "to": "botapi", "label": "poll", "variant": "emphasis" },
+    { "id": "tg-handler", "from": "telegram", "to": "handler", "label": "handle" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Що набір не робить",
+      "items": [
+        "Не завантажує й не підміняє бінарник: update лише перевіряє тег",
+        "Бізнес-логіка, команди й політика оновлення лишаються в хості",
+        "Автозапуск поза Windows повертає Error::Unsupported"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Feature-флаги",
+      "items": [
+        "autostart доступний завжди, без HTTP і GUI-залежностей",
+        "update увімкнено за замовчуванням; telegram і tray — опційні",
+        "full = update + telegram + tray"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Доступ і межі",
+      "items": [
+        "Непорожній allow_chats пропускає команди лише з цих chat id",
+        "Draft і prerelease не вважаються новою версією",
+        "run_loop блокує потік до Quit; callback має бути 'static",
+        "Шлях до exe для autostart мусить бути абсолютним"
+      ]
+    }
+  ]
+}
