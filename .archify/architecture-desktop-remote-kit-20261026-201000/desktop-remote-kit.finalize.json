@@ -5,14 +5,14 @@
   "status": "fail",
   "type": "architecture",
   "quality": "showcase",
-  "startedAt": "2026-10-26T17:52:14.065Z",
+  "startedAt": "2026-10-27T06:07:15.296Z",
   "specification": {
-    "path": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+    "path": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
     "sha256": "aff33f011c338df72a2f0b38a136ca91b55fed7b7873e2273af2150c34f08de6",
     "bytes": 5750
   },
   "artifact": {
-    "path": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+    "path": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
     "sha256": "467445c97cb0d63228786a702fb61872598b0900fda3fc457f799e356cc8d776",
     "bytes": 832119
   },
@@ -27,12 +27,12 @@
         "C:\\Users\\Public\\archify-skill\\bin\\archify.mjs",
         "deliver",
         "architecture",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "--quality",
         "showcase",
         "--repo-root",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit",
         "--json"
       ],
       "receipt": {
@@ -56,28 +56,28 @@
     "deliver": {
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 907,
+      "durationMs": 1049,
       "command": [
         "C:\\Program Files\\nodejs\\node.exe",
         "C:\\Users\\Public\\archify-skill\\bin\\archify.mjs",
         "deliver",
         "architecture",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "--quality",
         "showcase",
         "--repo-root",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit",
         "--json"
       ],
       "receipt": {
         "schemaVersion": 1,
-        "receiptId": "c0c3c4e7-a5cb-4702-944d-0d6ff77b7190",
+        "receiptId": "499a838a-f416-40d5-b590-ee502b47562c",
         "ok": true,
         "command": "deliver",
         "type": "architecture",
-        "input": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
-        "output": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "input": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+        "output": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "specification": {
           "sha256": "aff33f011c338df72a2f0b38a136ca91b55fed7b7873e2273af2150c34f08de6",
           "bytes": 5750
@@ -116,17 +116,17 @@
     "check": {
       "status": "pass",
       "exitCode": 0,
-      "durationMs": 241,
+      "durationMs": 257,
       "command": [
         "C:\\Program Files\\nodejs\\node.exe",
         "C:\\Users\\Public\\archify-skill\\bin\\archify.mjs",
         "check",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "--require-provenance"
       ],
       "receipt": {
         "ok": true,
-        "file": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "file": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "artifact": {
           "sha256": "467445c97cb0d63228786a702fb61872598b0900fda3fc457f799e356cc8d776",
           "bytes": 832119
@@ -278,18 +278,18 @@
           "issues": []
         },
         "provenance": "current",
-        "deliveryReceiptId": "c0c3c4e7-a5cb-4702-944d-0d6ff77b7190"
+        "deliveryReceiptId": "499a838a-f416-40d5-b590-ee502b47562c"
       }
     },
     "browser-check": {
       "status": "fail",
       "exitCode": 1,
-      "durationMs": 201,
+      "durationMs": 58,
       "command": [
         "C:\\Program Files\\nodejs\\node.exe",
         "C:\\Users\\Public\\archify-skill\\bin\\archify.mjs",
         "browser-check",
-        "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
         "--json",
         "--require-provenance"
       ],
@@ -302,9 +302,9 @@
         "status": "fail",
         "visualReview": "not-requested",
         "provenance": "current",
-        "deliveryReceiptId": "c0c3c4e7-a5cb-4702-944d-0d6ff77b7190",
+        "deliveryReceiptId": "499a838a-f416-40d5-b590-ee502b47562c",
         "artifact": {
-          "path": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+          "path": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
           "sha256": "467445c97cb0d63228786a702fb61872598b0900fda3fc457f799e356cc8d776",
           "bytes": 832119
         },
@@ -313,22 +313,25 @@
           "motion": "still"
         },
         "chrome": {
-          "status": "available",
-          "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+          "status": "not-checked",
+          "executable": null
         },
         "diagnostics": [
           {
-            "code": "viewer/browser-check-runtime",
+            "code": "viewer/evidence-path-conflict",
             "severity": "error",
-            "message": "browser-check could not complete its Chrome inspection.",
+            "message": "browser-check will not replace the existing unowned evidence path \"C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json\".",
             "subject": {
-              "artifact": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html"
+              "artifact": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+              "evidencePath": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json"
             },
             "evidence": {
-              "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nWindows browser startup may have relaunched before connecting to the DevTools pipe. Retry from a non-elevated PowerShell opened normally, outside an elevated or compatibility-mode parent. Archify does not disable browser de-elevation or the sandbox to preserve pipe handles.\nChrome transport: Node v26.5.0, libuv 1.52.1, win32; pid=7524, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=false, ended=true, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+              "reason": {
+                "code": "ownership-sidecar-path-mismatch"
+              }
             },
             "supportedFixes": [
-              "resolve the reported Chrome inspection error, then rerun browser-check"
+              "move the conflicting file aside, or choose a separate --out-dir, then rerun browser-check"
             ]
           }
         ],
@@ -359,7 +362,7 @@
           "receipt": "desktop-remote-kit.browser-check.json",
           "files": []
         },
-        "error": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nWindows browser startup may have relaunched before connecting to the DevTools pipe. Retry from a non-elevated PowerShell opened normally, outside an elevated or compatibility-mode parent. Archify does not disable browser de-elevation or the sandbox to preserve pipe handles.\nChrome transport: Node v26.5.0, libuv 1.52.1, win32; pid=7524, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=false, ended=true, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+        "error": "browser-check will not replace the existing unowned evidence path \"C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json\"."
       }
     }
   },
@@ -369,29 +372,32 @@
   },
   "diagnostics": [
     {
-      "code": "viewer/browser-check-runtime",
+      "code": "viewer/evidence-path-conflict",
       "severity": "error",
-      "message": "browser-check could not complete its Chrome inspection.",
+      "message": "browser-check will not replace the existing unowned evidence path \"C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json\".",
       "subject": {
-        "artifact": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html"
+        "artifact": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+        "evidencePath": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json"
       },
       "evidence": {
-        "reason": "Chrome DevTools read pipe failed: stream ended\nChrome process: still running.\nWindows browser startup may have relaunched before connecting to the DevTools pipe. Retry from a non-elevated PowerShell opened normally, outside an elevated or compatibility-mode parent. Archify does not disable browser de-elevation or the sandbox to preserve pipe handles.\nChrome transport: Node v26.5.0, libuv 1.52.1, win32; pid=7524, exitCode=null, signalCode=null.\nChrome read pipe: readable=false, ended=true, destroyed=false, receivedBytes=0, messages=0, bufferedBytes=0.\nChrome write pipe: writable=false, ended=true, destroyed=false, completedWrites=1, writtenBytes=50, bufferedBytes=0."
+        "reason": {
+          "code": "ownership-sidecar-path-mismatch"
+        }
       },
       "supportedFixes": [
-        "resolve the reported Chrome inspection error, then rerun browser-check"
+        "move the conflicting file aside, or choose a separate --out-dir, then rerun browser-check"
       ]
     }
   ],
   "evidence": {
-    "receipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize.json",
-    "summaryReceipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize-summary.json",
-    "browserCheckReceipt": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json"
+    "receipt": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize.json",
+    "summaryReceipt": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.browser-check.json"
   },
   "visualReview": "not-requested",
   "failedStage": "browser-check",
-  "finishedAt": "2026-10-26T17:52:15.842Z",
-  "durationMs": 1777,
+  "finishedAt": "2026-10-27T06:07:17.125Z",
+  "durationMs": 1828,
   "update": {
     "status": "current",
     "installedVersion": "3.2.0",

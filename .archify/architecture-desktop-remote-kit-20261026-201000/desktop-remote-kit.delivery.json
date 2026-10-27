@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "receiptId": "c0c3c4e7-a5cb-4702-944d-0d6ff77b7190",
+  "receiptId": "499a838a-f416-40d5-b590-ee502b47562c",
   "status": "current",
   "command": "deliver",
   "type": "architecture",
-  "input": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
-  "output": "C:\\Users\\Public\\archify-20261026\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
+  "input": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\candidate.json",
+  "output": "C:\\Users\\Public\\archify-push\\desktop-remote-kit\\.archify\\architecture-desktop-remote-kit-20261026-201000\\desktop-remote-kit.html",
   "specification": {
     "sha256": "aff33f011c338df72a2f0b38a136ca91b55fed7b7873e2273af2150c34f08de6",
     "bytes": 5750
